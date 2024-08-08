@@ -179,7 +179,7 @@ $userID = $_SESSION['userID'] ?? null; // Store userID from session
             <strong>Available Time:</strong> ${support.availableDate}<br>
             <div>
                 <a href="rating.php?ratee=${support.userID}&rater=${currentUserID}
-                ">Rate this Peer Tutor</a><br>
+                ">Rate this FI</a><br>
                 <a href="chat.php?buddy=${support.name}&buddyid=${support.userID}">Chat with <strong>Buddy</strong></a><br>
                 <a href="conference.php?buddy=${support.name}&buddyid=${support.userID}">Call <strong>Buddy</strong></a>
             </div>

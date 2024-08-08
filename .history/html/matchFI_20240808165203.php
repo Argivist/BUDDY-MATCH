@@ -3,7 +3,7 @@
 include_once '../settings/connection.php';
 session_start(); // Start session if not already started
 
-$stmt=$pdo->prepare("SELECT userID, name FROM users WHERE roleID = 3");
+$stmt=$pdo->prepare("SELECT userID, name FROM users WHERE roleID = 4");
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

@@ -1,8 +1,7 @@
 <?php
 // Fetch FIs
 include_once '../settings/connection.php';
-session_start(); // Start session if not already started
-
+//$sql = "SELECT id, fname, lname FROM peertutor";
 $stmt=$pdo->prepare("SELECT userID, name FROM users WHERE roleID = 3");
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -11,8 +10,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $stmt_courses=$pdo->prepare("SELECT courseID, courseName FROM courses");
 $stmt_courses->execute();
 $result_courses = $stmt_courses->fetchAll(PDO::FETCH_ASSOC);
-
-$userID = $_SESSION['userID'] ?? null; // Store userID from session
 ?>
 
 <!DOCTYPE html>
@@ -110,17 +107,37 @@ $userID = $_SESSION['userID'] ?? null; // Store userID from session
     <div class="container">
         <h1>Study Support Finder</h1>
 
+        <!-- <label for="supportType">Select Type</label> -->
+        <!-- <label for="supportType">Select Peer Tutor</label>
+        
+        <select id="supportType" name="supportType">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . htmlspecialchars($row['userID']) . '">' . htmlspecialchars($row['name']) . '</option>';
+                }
+            } else {
+                echo '<option value="">No Peer Tutor Available Available</option>';
+            }
+            ?>
+        </select> -->
+
+
         <label for="course">Course</label>
         <select id="course" name="course">
             <?php
-            foreach ($result_courses as $row) {
-                echo '<option value="' . htmlspecialchars($row['courseID']) . '">' . htmlspecialchars($row['courseName']) . '</option>';
+            if ($result_courses->num_rows > 0) {
+                while ($row = $result_courses->fetch_assoc()) {
+                    echo '<option value="' . htmlspecialchars($row['id']) . '">' . htmlspecialchars($row['course_name']) . '</option>';
+                }
+            } else {
+                echo '<option value="">No Courses Available</option>';
             }
             ?>
         </select>
 
-        <label for="time">Available Date</label>
-        <input type="date" id="time" name="time">
+        <label for="time">Available Time</label>
+        <input type="text" id="time" placeholder="Enter available times (e.g., 2-4 PM)">
 
         <button onclick="findSupport()">Find Support</button>
 
@@ -139,58 +156,48 @@ $userID = $_SESSION['userID'] ?? null; // Store userID from session
     </div>
 
     <script>
-         const currentUserID = '<?php echo $userID; ?>';
+        
+
+        
+
         function findSupport() {
-            const supportType = "Peer Tutor";
+            // const supportType = document.getElementById('supportType').value;
+            const supporttype="peerTutor";
             const course = document.getElementById('course').value;
             const time = document.getElementById('time').value;
 
-            const data = new FormData();
-            data.append('supportType', supportType);
-            data.append('course', course);
-            data.append('time', time);
+            // let potentialSupports = [];
+            // let supports = supportType === 'FI' ? fIs : peerTutors;
 
-            fetch('../action/availablePeer.php', {
-                method: 'POST',
-                body: data
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        displayResults(data);
-                    } else {
-                        displayNoMatchMessage();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            for (let i = 0; i < supports.length; i++) {
+                if (supports[i][1] === course && supports[i][2].includes(time)) {
+                    potentialSupports.push(supports[i]);
+                }
+            }
+
+            if (potentialSupports.length === 0) {
+                displayNoMatchMessage();
+                return;
+            }
+
+            displayResults(potentialSupports);
         }
 
         function displayResults(potentialSupports) {
-    const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = '';
-    potentialSupports.forEach(support => {
-        const resultDiv = document.createElement('div');
-        resultDiv.className = 'result';
-        resultDiv.innerHTML = `
-            <strong>Name:</strong> ${support.name}<br>
-            <strong>Course:</strong> ${support.courseID}<br>
-            <strong>Available Time:</strong> ${support.availableDate}<br>
-            <div>
-                <a href="rating.php?ratee=${support.userID}&rater=${currentUserID}
-                ">Rate this Peer Tutor</a><br>
-                <a href="chat.php?buddy=${support.name}&buddyid=${support.userID}">Chat with <strong>Buddy</strong></a><br>
-                <a href="conference.php?buddy=${support.name}&buddyid=${support.userID}">Call <strong>Buddy</strong></a>
-            </div>
-        `;
-        resultsContainer.appendChild(resultDiv);
-    });
-    document.getElementById('result-container').style.display = 'block';
-    document.getElementById('success-message').style.display = 'block';
-    document.getElementById('failure-message').style.display = 'none';
-}
-
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+            potentialSupports.forEach(support => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'result';
+                resultDiv.innerHTML = `<strong>Name:</strong> ${support[0]}<br>
+                                       <strong>Course:</strong> ${support[1]}<br>
+                                       <strong>Available Time:</strong> ${support[2]}`;
+                resultsContainer.appendChild(resultDiv);
+            });
+            document.getElementById('result-container').style.display = 'block';
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('failure-message').style.display = 'none';
+        }
 
         function displayNoMatchMessage() {
             document.getElementById('result-container').style.display = 'none';

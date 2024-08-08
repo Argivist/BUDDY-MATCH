@@ -139,7 +139,6 @@ $userID = $_SESSION['userID'] ?? null; // Store userID from session
     </div>
 
     <script>
-         const currentUserID = '<?php echo $userID; ?>';
         function findSupport() {
             const supportType = "Peer Tutor";
             const course = document.getElementById('course').value;
@@ -178,8 +177,12 @@ $userID = $_SESSION['userID'] ?? null; // Store userID from session
             <strong>Course:</strong> ${support.courseID}<br>
             <strong>Available Time:</strong> ${support.availableDate}<br>
             <div>
-                <a href="rating.php?ratee=${support.userID}&rater=${currentUserID}
-                ">Rate this Peer Tutor</a><br>
+                <a href="rating.php?ratee=${support.userID}&rater=
+                <?php
+                session_start();
+                echo $_SESSION['userID'];
+                ?>
+                ">Rate this FI</a><br>
                 <a href="chat.php?buddy=${support.name}&buddyid=${support.userID}">Chat with <strong>Buddy</strong></a><br>
                 <a href="conference.php?buddy=${support.name}&buddyid=${support.userID}">Call <strong>Buddy</strong></a>
             </div>

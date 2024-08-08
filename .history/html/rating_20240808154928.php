@@ -97,7 +97,6 @@ $rater=$_GET['rater'];
         </h1>
         <label for="rating">Rating (1-5)</label>
         <select id="rating" onchange="checkRating()">
-            <option value="1">Select a raing</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -144,13 +143,13 @@ $rater=$_GET['rater'];
             })
             .then(response => response.text())
             .then(text => alert(text))//alert and wait
-            .then(()=>{
+            .then(()+=>{
                 //wait for 2 seconds
                 setTimeout(() => {
                     window.location.href = "../index.php";
                 }, 2000);
             })            
-            // .then(window.location.href = "../index.php")
+            .then(window.location.href = "../index.php")
             .catch(error => console.error('Error:', error));
 }
 
