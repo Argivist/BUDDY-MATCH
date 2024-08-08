@@ -69,8 +69,8 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.php">About Us</a></li>
+						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+						<li class="nav-item active"><a class="nav-link" href="about.php">About Us</a></li>
 						<?php
 						//time tracker if a peer tutor
 						if(isset($_SESSION['userID'])){
@@ -133,142 +133,94 @@
 	</header>
 	<!-- End header -->
 	
-	<div id="carouselExampleControls" class="carousel slide bs-slider box-slider" data-ride="carousel" data-pause="hover" data-interval="false" >
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-			<li data-target="#carouselExampleControls" data-slide-to="1"></li>
-			<li data-target="#carouselExampleControls" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner" role="listbox">
-			<div class="carousel-item active">
-				<div id="home" class="first-section" style="background-image:url('images/pinkbg1.jpeg');">
-					<div class="dtab">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12 col-sm-12 text-right">
-									<div class="big-tagline">
-										<h2><strong>BuddyMatch </strong>  your companion through college</h2>
-										<p class="lead">With BuddyMatch, you are able to find study partners, student tutors and FIs. </p>
-										<?php
-										if (!isset($_SESSION['userID'])) {
-											echo	
-										'<a href="register.php" class="hover-btn-new"><span>Login</span></a>
-										'
-										;
-										}
-										?>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											
-									</div>
-								</div>
-							</div><!-- end row -->            
-						</div><!-- end container -->
-					</div>
-				</div><!-- end section -->
-			</div>
-			<div class="carousel-item">
-				<div id="home" class="first-section" style="background-image:url('images/slider-02.jpg');">
-					<div class="dtab">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12 col-sm-12 text-left">
-									<div class="big-tagline">
-										<h2 data-animation="animated zoomInRight">Buddy <strong>MATCH</strong></h2>
-										<p class="lead" data-animation="animated fadeInLeft">Interact with your buddy and learn form each other</p>
-                                        <?php
-                        if (!isset($_SESSION['userID'])) {
-											echo '<a href="register.php" class="hover-btn-new"><span>Login</span></a>
-											';
-										}
-											?>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											
-									</div>
-								</div>
-							</div><!-- end row -->            
-						</div><!-- end container -->
-					</div>
-				</div><!-- end section -->
-			</div>
-			<div class="carousel-item">
-				<div id="home" class="first-section" style="background-image:url('images/slider-03.jpg');">
-					<div class="dtab">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12 col-sm-12 text-center">
-									<div class="big-tagline">
-										<h2 data-animation="animated zoomInRight"><strong>BM</strong> Platform</h2>
-										<p class="lead" data-animation="animated fadeInLeft">Interact with each other in real time</p>
-										<?php
-										if (!isset($_SESSION['userID'])) {
-										echo '	
-										
-										<a href="register.php" class="hover-btn-new"><span>Login</span></a>
-									';}
-										?>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<a href="about.php" class="hover-btn-new"><span>Read More</span></a>
-									</div>
-								</div>
-							</div><!-- end row -->            
-						</div><!-- end container -->
-					</div>
-				</div><!-- end section -->
-			</div>
-			<!-- Left Control -->
-			<a class="new-effect carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-				<span class="fa fa-angle-left" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-
-			<!-- Right Control -->
-			<a class="new-effect carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-				<span class="fa fa-angle-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>About Us<span class="m_1">Learn through Peers</span></h1>
 		</div>
 	</div>
 	
-    <div id="overviews" class="section wb">
+    <div id="overviews" class="section lb">
         <div class="container">
             <div class="section-title row text-center">
                 <div class="col-md-8 offset-md-2">
                     <h3>About</h3>
-                    <p class="lead">The BuddyMatch Platform alows you to connect with peers to learn and expand your undersanding in studies.</p>
+                    <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
                 </div>
             </div><!-- end title -->
         
-        
+            <!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->
+	
+	
+
+    <div id="testimonials" class="parallax section db parallax-off" style="background-image:url('images/parallax_04.jpg');">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3>The Team</h3>
+                <p>A group of dedicated individuals motivated by each other. </p>
+            </div><!-- end title -->
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="testi-carousel owl-carousel owl-theme">
+                        <div class="testimonial clearfix">
+							<div class="testi-meta">
+                                <img src="images/konama.jpg" width="100px" alt=""class="img-fluid">
+                                <h4>Konama</h4>
+                            </div>
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> Project Lead</h3>
+                                <p class="lead">They have got my project on time with the competition with a sed highly skilled, and experienced & professional team.</p>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        <!-- end testimonial -->
+
+                        <div class="testimonial clearfix">
+							<div class="testi-meta">
+                                <img src="images/patricia.jpg" alt="" class="img-fluid">
+                                <h4>Patricia </h4>
+                            </div>
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> Core Memeber</h3>
+                                    </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        <!-- end testimonial -->
+
+                        <div class="testimonial clearfix">
+							<div class="testi-meta">
+                                <img src="images/john.jpg" alt="" class="img-fluid ">
+                                <h4>John </h4>
+                            </div>
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i>Core Member</h3>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        <!-- end testimonial -->
+                        <div class="testimonial clearfix">
+							<div class="testi-meta">
+                                <img src="images/hutton.jpg" alt="" class="img-fluid">
+                                <h4>Hutton </h4>
+                            </div>
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> Core Member</h3>
+        </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        <!-- end testimonial -->
+
+                        <!-- end testimonial -->
+                    </div><!-- end carousel -->
+                </div><!-- end col -->
+            </div><!-- end row -->
         </div><!-- end container -->
     </div><!-- end section -->
 
-    
+    <!-- end section -->
 
-	<div class="section cl">
-		<div class="container">
-			<div class="row text-left stat-wrap">
-				<div class="col-md-4 col-sm-4 col-xs-12">
-					<span data-scroll class="global-radius icon_wrap effect-1 alignleft"><i class="flaticon-study"></i></span>
-					<p class="stat_count">10</p>
-					<h3>Students</h3>
-				</div><!-- end col -->
-
-				<div class="col-md-4 col-sm-4 col-xs-12">
-					<span data-scroll class="global-radius icon_wrap effect-1 alignleft"><i class="flaticon-online"></i></span>
-					<p class="stat_count">2</p>
-					<h3>FIs</h3>
-				</div><!-- end col -->
-
-				<div class="col-md-4 col-sm-4 col-xs-12">
-					<span data-scroll class="global-radius icon_wrap effect-1 alignleft"><i class="flaticon-years"></i></span>
-					<p class="stat_count">5</p>
-					<h3>Student Tutors</h3>
-				</div><!-- end col -->
-			</div><!-- end row -->
-		</div><!-- end container -->
-	</div><!-- end section -->
-   
 
     <footer class="footer">
         <div class="container">
