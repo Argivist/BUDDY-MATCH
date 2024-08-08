@@ -14,7 +14,10 @@
     // If connection fails, throw an exception with the error message
   //  die("Connection failed: " . $e->getMessage());
 //}
+?>
 
+
+<?php
 // Declare constant variables to store the database connection parameters
 $HOST = 'sql201.infinityfree.com'; 
 $USERNAME = 'if0_37054537';

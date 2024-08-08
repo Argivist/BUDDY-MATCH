@@ -80,11 +80,10 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $sender->execute([$message['senderID']]);
             $senderName = $sender->fetch(PDO::FETCH_ASSOC);
             $Sname = $senderName['name'];
-            
 
                 echo "<h1>New Chat Invitation</h1>";
-                echo "<p class='message'>You have a new notification from <strong>{$Sname}</strong>.</p>";
-                echo "<a href='{$message['link']}'>Join {$message['message']}</a>";
+                echo "<p class='message'>You have a new message from <strong>{$Sname}</strong>.</p>";
+                echo "<a href='{$message['link']}'>Join Chat</a>";
 
             }
         } else {
