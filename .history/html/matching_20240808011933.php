@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Study Buddy Finder</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #fce4ec;
+            color: #880e4f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #f8bbd0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background: #d81b60;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #ad1457;
+        }
+
+        .result-container {
+            margin-top: 20px;
+            background: #f48fb1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .result {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f06292;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .chat-box {
+            display: none;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.php" class="home-link">Home</a>
+    <div class="container">
+        <h1>Study Buddy Finder</h1>
+    <form id="studyBuddyForm" method="POST" action="../action/matchingAction.php">
+        <!-- <label for="className">Course Name</label>
+        <select id="className" name="className">
+            <option value="Precalculus 1">Precalculus 1</option>
+            <option value="Precalculus 2">Precalculus 2</option>
+            <option value="Calculus 1">Calculus 1</option>
+            <option value="Calculus 2">Calculus 2</option>
+            <option value="Applied Calculus">Applied Calculus</option>
+            <option value="Engineering Calculus">Engineering Calculus</option>
+            <option value="Python">Python</option>
+            <option value="OOP">OOP</option>
+            <option value="Data Structures">Data Structures</option>
+            <option value="Algorithms">Algorithms</option>
+            <option value="WebTech">WebTech</option>
+            <option value="Research Methods">Research Methods</option>
+            <option value="Hardware">Hardware</option>
+            <option value="COA">COA</option>
+            <option value="Software Engineering">Software Engineering</option>
+            <option value="Intro to AI">Intro to AI</option>
+        </select>
+
+        
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter name">
+
+        <label for="major">Major</label>
+        <input type="text" id="major" name="major" placeholder="Enter major">
+        
+    --><label for="timeToStudy">Hours to Study</label>
+        <input type="number" id="timeToStudy" name="timeToStudy" placeholder="Enter hours willing to study">
+       <!-- 
+        <label for="stressed">Stress Level (0-5)</label>
+        <input type="number" id="stressed" name="stressed" placeholder="Enter stress level" min="0" max="5">
+        
+        
+        <label for="interest">Interest</label>
+        <input type="text" id="interest" name="interest" placeholder="Enter interest (e.g., video, discussions, etc.)">
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" value="<?php echo date('Y-m-d');?>">
+
+        <label for="yearGroup">Year Group</label>
+            <select id="yearGroup" name="yearGroup">
+                <option value="">Select Year Group</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+            </select> -->
+        
+        <button type="submit">Find Study Buddy</button>
+    </form>
+
+        
+        
+    <div class="result-container" id="result-container" style="display: none;">
+        <h2>Matching Buddies:</h2>
+        <div id="results"></div>
+    </div>
+
+
+    <div class="chat-box" id="chat-box">
+        <h2>Chat with <span id="chat-buddy-name"></span></h2>
+        <div id="chat-messages" style="height: 200px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <!-- Chat messages will appear here -->
+        </div>
+        <input type="text" id="chat-input" placeholder="Type a message..." style="width: 80%;">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        const existingUsers = [
+            ['Sindhu', ['2024', 'Computer science', 'Precalculus 1', 'Calculus 1', 'Data Structures'], 2.5, 3, 'video', '2024-02-02'],
+            ['Tejal', ['2025', 'IMS', 'Precalculus 2', 'Applied Calculus', 'Research Methods'], 3, 4],
+            ['Rhea', ['2026', 'IMS', 'Calculus 1', 'Data Structures'], 4.5, 3,'slides', '2024-06-14'],
+            ['John', ['2024', 'Computer science', 'Python', 'OOP'], 6, 2,'teaching', '2024-05-22'],
+            ['Anushka', ['2027', 'Computer Engineering', 'Engineering Calculus', 'Software Engineering'], 7, 4,'discussions', '2024-08-07'],
+            ['Stacy', ['2025', 'IMS', 'WebTech', 'Research Methods'], 3, 3,'video', '2024-02-19'],
+            ['James', ['2026', 'Computer science', 'Calculus 2', 'Hardware'], 5, 2,'discussions', '2024-01-29'],
+            ['Amaya', ['2027', 'Computer science', 'COA', 'Intro to AI'], 5.5, 3,'quiet time', '2024-01-30'],
+            ['Saharya', ['2024', 'Computer science', 'Data Structures', 'Algorithms'], 6, 3,'teaching', '2024-11-14'],
+            ['Bob', ['2025', 'IMS', 'Python', 'WebTech'], 5, 2,'teaching', '2024-11-14'],
+            ['Dylan', ['2026', 'IMS', 'OOP', 'Applied Calculus'], 7, 3, 'slides', '2024-01-15'],
+            ['Thomas', ['2027', 'BA', 'Precalculus 1', 'Precalculus 2'], 8, 3,'video', '2025-09-17'],
+            ['Mike', ['2024', 'Engineering', 'Calculus', 'Python'], 4, 2],
+            ['Gamaya', ['2025', 'Software Engineering', 'Intro to AI'], 6, 3],
+            ['Lizzie', ['2026', 'COA', 'WebTech'], 6, 3],
+            ['Tara', ['2027', 'Precalculus 1', 'Algorithms'], 3.5, 3],
+            ['Kelsie', ['2024', 'Precalculus 2', 'Research Methods'], 4, 3]
+        ];
+
+        function validateInput(value, regex, errorMessage) {
+            if (!regex.test(value)) {
+                alert(errorMessage);
+                return false;
+            }
+            return true;
+        }
+
+        function findStudyBuddy() {
+            const studentName = document.getElementById('studentName').value;
+            const courseName = document.getElementById('courseName').value;
+            const major = document.getElementById('major').value;
+            const timeToStudy = document.getElementById('timeToStudy').value;
+            const stressed = document.getElementById('stressed').value;
+            const yearGroup = document.getElementById('yearGroup').value;
+            const date = document.getElementById('date').value;
+
+            // Validate inputs
+            if (!validateInput(studentName, /^[A-Za-z\s]+$/, "Please enter a valid name.")) return;
+            if (!validateInput(major, /^[A-Za-z\s]+$/, "Please enter a valid major.")) return;
+            if (!validateInput(timeToStudy, /^\d+$/, "Please enter a valid number for hours to study.")) return;
+            if (!validateInput(stressed, /^[0-5]$/, "Please enter a stress level between 0 and 5.")) return;
+            if (!validateInput(yearGroup, /^\d{4}$/, "Please select a valid year group.")) return;
+
+            // Validate date
+            const minDate = "2024-08-09";
+            if (date < minDate) {
+                alert("Please select a date that is from 9th August 2024 and henceforth.");
+                return;
+            }
+
+            const timeToStudyNum = parseFloat(timeToStudy);
+            const stressedNum = parseInt(stressed);
+
+            // Filter potential buddies based on course and year group
+            let potentialStudyBuddies = existingUsers.filter(user => user[1].includes(courseName) && user[1].includes(yearGroup));
+
+            if (potentialStudyBuddies.length === 0) {
+                alert("No study buddies are taking this course or from the selected year group.");
+                return;
+            }
+
+            // Calculate scores and find the best matches
+            let finalProspects = [];
+            let scoreList = [];
+            for (let k = 0; k < potentialStudyBuddies.length; k++) {
+                let timeDiff = Math.abs(timeToStudyNum - potentialStudyBuddies[k][2]);
+                let stressDiff = Math.abs(stressedNum - potentialStudyBuddies[k][3]);
+                let score = (1 - timeDiff / 10) * 0.5 + (1 - stressDiff / 5) * 0.5;
+                scoreList.push([potentialStudyBuddies[k][0], score]);
+            }
+
+            scoreList.sort((a, b) => b[1] - a[1]);
+            for (let i = 0; i < scoreList.length; i++) {
+                for (let j = 0; j < potentialStudyBuddies.length; j++) {
+                    if (scoreList[i][0] === potentialStudyBuddies[j][0]) {
+                        finalProspects.push(potentialStudyBuddies[j]);
+                    }
+                }
+            }
+
+            displayResults(finalProspects);
+            document.getElementById('success-message').innerText = ${studentName}, you have successfully found a match!;
+            document.getElementById('success-box').style.display = 'block';
+        }
+
+        function displayResults(finalProspects) {
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+            finalProspects.forEach(buddy => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'result';
+                resultDiv.innerHTML = `<strong>Name:</strong> ${buddy[0]}<br>
+                                       <strong>Year Group:</strong> ${buddy[1][0]}<br>
+                                       <strong>Major:</strong> ${buddy[1][1]}<br>
+                                       <strong>Courses:</strong> ${buddy[1].slice(2).join(', ')}<br>
+                                       <strong>Hours to Study:</strong> ${buddy[2]}<br>
+                                       <strong>Stress Level:</strong> ${buddy[3]}`;
+                resultsContainer.appendChild(resultDiv);
+            });
+            document.getElementById('result-container').style.display = 'block';
+        }
+
+        // Set minimum date to August 9th
+        document.getElementById('date').min = "2024-08-09";
+        document.getElementById('date').value = "2024-08-09";
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</body>
+</html>
+
+

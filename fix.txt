@@ -1,0 +1,3 @@
+fix
+- rating
+- redirecting fi and perer to chat and video
