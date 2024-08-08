@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         SELECT u.userID, u.name, u.major, up.studyHabits, up.interests, up.gradYear, up.stressLevel, up.availableDate,
                c.courseName
         FROM users u
-        JOIN userProfiles up ON u.userID = up.userID
+        JOIN userprofiles up ON u.userID = up.userID
         JOIN usercourses uc ON u.userID = uc.userID
         JOIN courses c ON uc.courseID = c.courseID
         WHERE u.major = ? AND up.gradYear = ? AND c.courseName = ? AND up.availableDate = ?"

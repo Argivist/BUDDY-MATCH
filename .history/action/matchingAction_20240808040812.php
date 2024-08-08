@@ -4,11 +4,11 @@ require '../settings/connection.php';  // Ensure this path is correct
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Getting the profile from the db
-    $stmt = $pdo->prepare("SELECT * FROM userProfiles WHERE userID = ?");
+    $stmt = $pdo->prepare("SELECT * FROM userprofiles WHERE userID = ?");
     $stmt->execute([$_SESSION['userID']]);
     $profile = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $className = $profile['courseID']; // TODO: Add the courseName field to the userProfiles table    
+    $className = $profile['courseID']; // TODO: Add the courseName field to the userprofiles table    
     $major = $profile['major'];
     $timeToStudy = $profile['timeToStudy'];
     $stressed = $profile['stressLevel'];
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     SELECT u.userID, u.name, u.major, up.studyHabits, up.interests, up.gradYear, up.stressLevel, up.availableDate,
     c.courseName
     FROM users u
-    JOIN userProfiles up ON u.userID = up.userID
+    JOIN userprofiles up ON u.userID = up.userID
     JOIN usercourses uc ON u.userID = uc.userID
     JOIN courses c ON uc.courseID = c.courseID
     WHERE u.major = ? AND up.gradYear = ? AND uc.courseID = ? AND up.availableDate = ?

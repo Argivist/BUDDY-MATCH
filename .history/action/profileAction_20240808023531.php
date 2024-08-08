@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profilePicture'])) {
                 $fileDestination = $uploadDir . $fileNameNew;
                 if (move_uploaded_file($profilePicture['tmp_name'], $fileDestination)) {
                     // Insert into database
-                    $stmt = $pdo->prepare("INSERT INTO userProfiles (userID, major, profilePicture, courseID, gradYear, studyHabits, interests, timeToStudy, stressLevel, availableDate) VALUES (?,?,?,?, ?,?, ?, ?, ?, ?)");
+                    $stmt = $pdo->prepare("INSERT INTO userprofiles (userID, major, profilePicture, courseID, gradYear, studyHabits, interests, timeToStudy, stressLevel, availableDate) VALUES (?,?,?,?, ?,?, ?, ?, ?, ?)");
                     if ($stmt->execute([$userID, $major, $fileNameNew, $courseName ,$gradYear, $studyHabits, $interests, $timeToStudy, $stressLevel, date('Y-m-d')])) {
                         
                         // adding too usercoursetable

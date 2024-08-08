@@ -11,7 +11,7 @@ if (!isset($_SESSION['userID'])) {
 $userID = $_SESSION['userID'];
 
 // Fetch user profile data
-$stmt = $pdo->prepare("SELECT * FROM userProfiles WHERE userID = ?");
+$stmt = $pdo->prepare("SELECT * FROM userprofiles WHERE userID = ?");
 $stmt->execute([$userID]);
 $profile = $stmt->fetch(PDO::FETCH_ASSOC);
 

@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if ($supportType === 'Peer Tutor') {
         $query = "SELECT u.userID, u.name, uc.courseID, p.availableDate
                   FROM users u
-                  JOIN userProfiles p ON u.userID = p.userID
+                  JOIN userprofiles p ON u.userID = p.userID
                   JOIN userCourses uc ON u.userID = uc.userID
                   WHERE u.roleID = 3 AND uc.courseID = ? AND p.availableDate LIKE ?";
     } else {

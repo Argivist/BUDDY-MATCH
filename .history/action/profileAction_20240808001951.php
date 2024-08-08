@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profilePicture'])) {
                 $fileDestination = $uploadDir . $fileNameNew;
                 if (move_uploaded_file($profilePicture['tmp_name'], $fileDestination)) {
                     // Insert into database
-                    $stmt = $pdo->prepare("INSERT INTO userProfiles (userID, major, profilePicture, gradYear, studyHabits, interests) VALUES (?, ?, ?, ?, ?, ?)");
+                    $stmt = $pdo->prepare("INSERT INTO userprofiles (userID, major, profilePicture, gradYear, studyHabits, interests) VALUES (?, ?, ?, ?, ?, ?)");
                     if ($stmt->execute([$userID, $major, $fileNameNew, $gradYear, $studyHabits, $interests])) {
                         header("Location: ../html/profileCreated.php");  // Redirect on success
                         exit();
