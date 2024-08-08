@@ -37,7 +37,6 @@ $headers = "From: no-reply@yourdomain.com\r\n";
 
 mail($receiverEmail, $subject, $message, $headers);
 
-
 // Redirect to chat URL
 header("Location: " . $chatUrl);
 exit();

@@ -35,10 +35,14 @@ $message = "Hi there,\n\n$user has invited you to a chat. You can join the chat 
            "Best regards,\nYour Team";
 $headers = "From: no-reply@yourdomain.com\r\n";
 
-mail($receiverEmail, $subject, $message, $headers);
+
+$mailSent = mail($receiverEmail, $subject, $message, $headers);
+if (!$mailSent) {
+    echo "Failed to send email.";
+}
 
 
 // Redirect to chat URL
-header("Location: " . $chatUrl);
+//header("Location: " . $chatUrl);
 exit();
 ?>
