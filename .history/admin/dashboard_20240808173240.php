@@ -106,7 +106,8 @@
             <div id="results"></div>
         </div>
     </div>
-<script>
+
+    <script>
     function viewAllUsers() {
     document.getElementById('user').classList.add('active');
     document.getElementById('report').classList.remove('active');
@@ -122,10 +123,7 @@
     })
     .then(response => response.json())
     .then(users => displayResults(users))
-    .catch(error => {
-        console.error('Error fetching users:', error);
-        alert('An error occurred while fetching users.');
-    });
+    .catch(error => console.error('Error fetching users:', error));
 }
 
 function viewReportedUsers() {
@@ -143,10 +141,7 @@ function viewReportedUsers() {
     })
     .then(response => response.json())
     .then(users => displayResults(users))
-    .catch(error => {
-        console.error('Error fetching reported users:', error);
-        alert('An error occurred while fetching reported users.');
-    });
+    .catch(error => console.error('Error fetching reported users:', error));
 }
 
 function displayResults(userList) {
@@ -186,12 +181,10 @@ function removeUser(userID) {
             alert('Failed to remove user.');
         }
     })
-    .catch(error => {
-        console.error('Error removing user:', error);
-        alert('An error occurred while removing the user.');
-    });
+    .catch(error => console.error('Error removing user:', error));
 }
-</script>
+
+    </script>
 <!-- Code injected by live-server -->
 <script>
 	// <![CDATA[  <-- For SVG support

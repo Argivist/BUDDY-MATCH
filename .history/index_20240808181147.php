@@ -73,7 +73,7 @@
 						<?php
 						//time tracker if a peer tutor
 						if(isset($_SESSION['userID'])){
-							if($_SESSION['roleID'] == 3){
+							if($_SESSION['role'] == 'Student Tutor'){
 								echo '<li class="nav-item"><a class="nav-link" href="html/tutortrack.php">Time Tracker</a></li>';
 							}
 						}

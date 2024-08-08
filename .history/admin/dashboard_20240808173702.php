@@ -106,7 +106,7 @@
             <div id="results"></div>
         </div>
     </div>
-<script>
+
     function viewAllUsers() {
     document.getElementById('user').classList.add('active');
     document.getElementById('report').classList.remove('active');
@@ -191,7 +191,7 @@ function removeUser(userID) {
         alert('An error occurred while removing the user.');
     });
 }
-</script>
+
 <!-- Code injected by live-server -->
 <script>
 	// <![CDATA[  <-- For SVG support

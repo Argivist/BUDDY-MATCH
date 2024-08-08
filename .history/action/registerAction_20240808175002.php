@@ -45,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($password, $user['password'])) {
                 $_SESSION['userID'] = $user['userID'];
                 $_SESSION['name'] = $user['name'];
-                $_SESSION['roleID'] = $user['roleID'];
                 
                 // Check if user is an admin
                 if ($user['roleID'] == 1) { // Assuming roleID 1 is admin
